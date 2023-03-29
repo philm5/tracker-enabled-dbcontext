@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Metadata;
 using TrackerEnabledDbContext.Common.Configuration;
 using TrackerEnabledDbContext.Common.Models;
 using TrackerEnabledDbContext.Core.Common.Configuration;
@@ -36,7 +37,7 @@ namespace TrackerEnabledDbContext.Core.Common.Auditors
             DateTime changeTime = DateTime.UtcNow;
 
             //changed to static class by Aaron Sulwer 3/16/2018
-            List<PropertyConfigurationKey> keyNames = (context as DbContext).GetKeyNames(entityType).ToList();
+            List<PropertyConfigurationKey> keyNames = (context as DbContext).GetKeyNames(_dbEntry).ToList();
 
             var newlog = new AuditLog
             {
